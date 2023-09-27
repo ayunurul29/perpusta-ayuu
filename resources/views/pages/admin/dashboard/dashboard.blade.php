@@ -163,7 +163,7 @@ Highcharts.chart('penerbit', {
     },
     xAxis: {
         categories: [
-            'Gramedia',
+            'PT.Putra Purnama',
             'Bentang Pustaka',
             'PT. Bukune Kreatif Cipta',
         ],
