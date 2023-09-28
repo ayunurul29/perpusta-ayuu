@@ -163,7 +163,7 @@ Highcharts.chart('penerbit', {
     },
     xAxis: {
         categories: [
-            'PT.Putra Purnama',
+            'Gramedia Pustaka Utama',
             'Bentang Pustaka',
             'PT. Bukune Kreatif Cipta',
         ],
@@ -210,7 +210,7 @@ Highcharts.chart('penerbit', {
     },
     xAxis: {
         categories: [
-            'Pramoedya Ananta Toer', 'Dhony Dhirgantoro', 'Andrea Hirata',''
+            'Andrea Hirata', 'Agatha Christie', 'Lia Seplia',
         ],
         crosshair: true
     },
