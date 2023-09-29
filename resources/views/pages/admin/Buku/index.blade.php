@@ -28,7 +28,7 @@
          <form method="get" action="{{ route('buku_search') }}">
                <form method="get" action="/search">
             <div class="input-group">
-                <input type="search"  class="form-control" name="search"   placeholder="Search Nama Buku..">
+                <input type="search"  class="form-control" name="search"   placeholder="Search ">
                 <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
                
             </div>

@@ -165,7 +165,8 @@ Highcharts.chart('penerbit', {
         categories: [
             'Gramedia Pustaka Utama',
             'Bentang Pustaka',
-            'PT. Bukune Kreatif Cipta',
+            'Gradien Mediatama',
+            'bukugpu'
         ],
         crosshair: true
     },
@@ -191,7 +192,7 @@ Highcharts.chart('penerbit', {
     },
     series: [{
         name: 'Buku',
-        data: [15.93, 13.63, 18.73,]
+        data: [15.93, 13.63, 18.73,14.23]
 
     }]
 });
@@ -210,7 +211,7 @@ Highcharts.chart('penerbit', {
     },
     xAxis: {
         categories: [
-            'Andrea Hirata', 'Agatha Christie', 'Lia Seplia',
+            'Andrea Hirata', 'Agatha Christie', 'Lia Seplia','Syahid Muhammad'
         ],
         crosshair: true
     },
@@ -236,48 +237,83 @@ Highcharts.chart('penerbit', {
     },
     series: [{
         name: 'Buku',
-        data: [15.93, 13.63, 18.73,]
+        data: [15.93, 13.63, 18.73,16.35]
 
     }]
 });
 </script>
 
 <script>
+// Create the chart
 Highcharts.chart('kategori', {
     chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
         type: 'pie'
     },
     title: {
-        text: 'Kategori Buku'
+        text: 'Kategori Buku',
+        
     },
-    tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    },
+
     accessibility: {
+        announceNewData: {
+            enabled: true
+        },
         point: {
             valueSuffix: '%'
         }
     },
+
     plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
+        series: {
+            borderRadius: 5,
             dataLabels: {
                 enabled: true,
-                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                format: '{point.name}: {point.y:.1f}%'
             }
         }
     },
-     series: [{
-        name: 'Buku',
-        data: [15.93, 13.63, 18.73,]
 
-        data: app\Models\Kategori::findarrayGrafikKategori();
-    }]
+    tooltip: {
+        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+    },
+
+    series: [
+        {
+            name: 'Kategori',
+            colorByPoint: true,
+            data: [
+                {
+                    name: 'Mistery',
+                    y: 48.54,
+                    drilldown: 'Mistery'
+                },
+                {
+                    name: 'Fiksi',
+                    y: 20.47,
+                    drilldown: 'Fiksi'
+                },
+                {
+                    name: 'Non Fiksi',
+                    y: 18.32,
+                    drilldown: 'Non Fiksi'
+                },
+                {
+                    name: 'Romance',
+                    y: 25.55,
+                    drilldown: 'Romance'
+                },
+               {
+                    name: 'Comedy',
+                    y: 30.15,
+                    drilldown: 'Comedy'
+                },
+            ]
+        }
+    ],
+
 });
+
 </script>
 
 
