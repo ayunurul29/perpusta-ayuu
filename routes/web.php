@@ -11,6 +11,9 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PenulisController;
 use App\Http\Controllers\PenerbitController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\AnggotaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +50,7 @@ Route::get('kategori-grafik', [KategoriController::class, 'grafik'])->name('kate
 
 //BUKU
 Route::get('/buku', [BukuController::class, 'index'])->name('buku_index');
+Route::get('/buku_anggota', [BukuController::class, 'index_anggota'])->name('buku_index_anggota');
 Route::get('/buku/create', [BukuController::class, 'create'])->name('buku_create');
 Route::post('/buku/store', [BukuController::class, 'store'])->name('buku_store');
 Route::post('/buku/show', [BukuController::class, 'show'])->name('buku_show');
@@ -63,6 +67,7 @@ Route::get('export-excel', [BukuController::class, 'excel'])->name('export-excel
 
 //KATEGORI
 Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori_index');
+Route::get('/kategori_anggota', [KategoriController::class, 'index_anggota'])->name('kategori_index_anggota');
 Route::get('/kategori/create', [KategoriController::class, 'create'])->name('kategori_create');
 Route::post('/kategori/store', [KategoriController::class, 'store'])->name('kategori_store');
 
@@ -77,6 +82,7 @@ Route::get('kategori/search', [KategoriController::class, 'search'])->name('kate
 
  //PEMINJAMAN
 Route::get('/peminjaman', [PeminjamanController::class, 'index'])->name('peminjaman_index');
+Route::get('/peminjaman_anggota', [PeminjamanController::class, 'index_anggota'])->name('peminjaman_index_anggota');
 Route::get('/peminjaman/create', [PeminjamanController::class, 'create'])->name('peminjaman_create');
 Route::post('/peminjaman/store', [PeminjamanController::class, 'store'])->name('peminjaman_store');
 Route::post('/peminjaman/show', [PeminjamanController::class, 'show'])->name('peminjaman_show');
@@ -94,6 +100,7 @@ Route::get('peminjaman-excel', [PeminjamanController::class, 'excel'])->name('pe
  
  //PENULIS
 Route::get('/penulis', [PenulisController::class, 'index'])->name('penulis_index');
+Route::get('/penulis_anggota', [PenulisController::class, 'index_anggota'])->name('penulis_index_anggota');
 Route::get('/penulis/create', [PenulisController::class, 'create'])->name('penulis_create');
 Route::post('/penulis/store', [PenulisController::class, 'store'])->name('penulis_store');
 Route::post('/penulis/show', [PenulisController::class, 'show'])->name('penulis_show');
@@ -109,6 +116,7 @@ Route::get('penulis-excel', [PenulisController::class, 'excel'])->name('penulis-
 
  //PENERBIT
 Route::get('/penerbit', [PenerbitController::class, 'index'])->name('penerbit_index');
+Route::get('/penerbit_anggota', [PenerbitController::class, 'index_anggota'])->name('penerbit_index_anggota');
 Route::get('/penerbit/create', [PenerbitController::class, 'create'])->name('penerbit_create');
 Route::post('/penerbit/store', [PenerbitController::class, 'store'])->name('penerbit_store');
 Route::post('/penerbit/show', [PenerbitController::class, 'show'])->name('penerbit_show');
@@ -121,25 +129,48 @@ Route::get('/penerbit/show/{id}', [PenerbitController::class, 'show'])->name('pe
 Route::get('penerbit/search', [PenerbitController::class, 'search'])->name('penerbit_search');
  Route::get('penerbit-pdf', [PenerbitController::class, 'generatePDF'])->name('generate-pdf');
 Route::get('penerbit-excel', [PenerbitController::class, 'excel'])->name('penerbit-excel');
+//ADMIN
+Route::get('/admin', [AdminController::class, 'index'])->name('admin_index');
+
+//ROLE
+Route::get('/role', [RoleController::class, 'index'])->name('role_index');
+
+//ANGGOTA
+Route::get('/anggota', [AnggotaController::class, 'index'])->name('anggota_index');
+Route::get('/anggota_anggota', [AnggotaController::class, 'index_anggota'])->name('anggota_index_anggota');
+Route::get('/anggota/create', [AnggotaController::class, 'create'])->name('anggota_create');
+Route::post('/anggota/store', [AnggotaController::class, 'store'])->name('anggota_store');
+Route::get('/anggota/show', [AnggotaController::class, 'show'])->name('anggota_show');
+
+Route::get('/anggota/edit/{id}', [AnggotaController::class, 'edit'])->name('anggota_edit');
+Route::get('/anggota/show/{id}', [AnggotaController::class, 'show'])->name('anggota_show');
+Route::post('/anggota/update/{anggota}', [AnggotaController::class, 'update'])->name('anggota_update');
+Route::post('/anggota/destroy/{anggota}', [AnggotaController::class, 'destroy'])->name('anggota_destroy');
+
+//SEMUA
+Route::get('/semua', [SemuaController::class, 'index'])->name('semua_index');
+Route::get('/semua_anggota', [SemuaController::class, 'index_anggota'])->name('semua_index_anggota');
+Route::get('/semua/create', [SemuaController::class, 'create'])->name('semua_create');
+Route::post('/semua/store', [SemuaController::class, 'store'])->name('semua_store');
+Route::get('/semua/show', [SemuaController::class, 'show'])->name('semua_show');
+
+Route::get('/semua/edit/{id}', [SemuaController::class, 'edit'])->name('semua_edit');
+Route::get('/semua/show/{id}', [SemuaController::class, 'show'])->name('semua_show');
+Route::post('/semua/update/{semua}', [SemuaController::class, 'update'])->name('semua_update');
+Route::post('/semua/destroy/{semua}', [SemuaController::class, 'destroy'])->name('semua_destroy');
+
+// Grup admin
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    // Rute-rute admin
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+});
+    // ..
+
+// Grup anggota
+Route::middleware(['auth', 'role:anggota'])->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+});
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])
-        ->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 });
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

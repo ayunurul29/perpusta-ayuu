@@ -21,7 +21,14 @@ class PenulisController extends Controller
             'penulis' => Penulis::all(),
         ]);
     }
+  public function index_anggota()
+    {
+        return view('pages.admin.penulis.index_anggota', [
+            'title' => 'Buku',
+            'Allpenulis' => Penulis::all(),
 
+        ]);
+    } 
     /**
      * Show the form for creating a new resource.
      */

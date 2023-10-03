@@ -13,10 +13,10 @@ class AnggotaController extends Controller
      */
     public function index()
     {
+        $anggota = Anggota::all();
         return view('pages.admin.anggota.index', [
             'title' => 'Anggota',
-            'anggota' => Anggota::all(),
-        ]);
+           
     }
 
     /**
@@ -41,13 +41,9 @@ class AnggotaController extends Controller
            
         ]);
 
-        Anggota::create([
-             'nama' => $request->nama,
-             'alamat' => $request->alamat,
-             'email' => $request->email,
+       $input =$request->all();
 
-        ]);
-
+        Anggota::create($input);
         return Redirect::route('anggota_index')->with('toast_success', 'Data berhasil di tambahkan  ');
 
     }
@@ -60,7 +56,6 @@ class AnggotaController extends Controller
          $data = Anggota::findOrFail($id);
 
         return view('pages.admin.anggota.show', [
-            'data' => $data
         ]);
     }
 
@@ -72,7 +67,7 @@ class AnggotaController extends Controller
         $item = Anggota::findOrFail($id);
 
          return view('pages.admin.anggota.edit', [
-            'item' => $item
+           
         ]);
     }
 
@@ -88,14 +83,10 @@ class AnggotaController extends Controller
            
         ]);
 
-         Anggota::create([
-             'nama' => $request->nama,
-             'alamat' => $request->alamat,
-             'email' => $request->email,
+        $input =$request->all();
 
-        ]);
-
-        return redirect()->route('anggota_index')->with('toast_success', 'Data berhasil di edit  ');
+        Anggota::create($input);
+        return Redirect::route('anggota_index')->with('toast_success', 'Data berhasil di tambahkan  ');
 
     }
 

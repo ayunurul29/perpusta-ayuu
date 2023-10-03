@@ -125,12 +125,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="col-sm-6">
+            <div class="col-sm-6">
                 <div class="card">
                     <div class="card-header bg-primary">
                         Grafik Buku Berdasarkan Kategori
@@ -147,6 +142,13 @@
                     </div>
                 </div>
             </div>
+            
+        </div>
+    </div>
+</div>
+
+
+
 
 
 <script src="https://code.highcharts.com/highcharts.js"></script>

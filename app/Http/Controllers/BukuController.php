@@ -27,7 +27,14 @@ class BukuController extends Controller
 
         ]);
     } 
+  public function index_anggota()
+    {
+        return view('pages.admin.buku.index_anggota', [
+            'title' => 'Buku',
+            'bukus' => Buku::all(),
 
+        ]);
+    } 
     /**
      * Show the form for creating a new resource.
      */

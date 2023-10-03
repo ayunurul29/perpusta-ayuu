@@ -21,7 +21,13 @@ class KategoriController extends Controller
             'kategori' => Kategori::all(),
         ]);
     }
-
+  public function index_anggota()
+    {
+        return view('pages.admin.kategori.index_anggota', [
+            'title' => 'Kategori',
+            'kategoris' => Kategori::all(),
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */

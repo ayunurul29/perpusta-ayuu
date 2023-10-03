@@ -16,6 +16,19 @@ class RegisterController extends Controller
     
     public function actionregister(Request $request)
     {
+        // Validasi data pendaftaran
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:8|confirmed',
+        'role' => 'required|in:admin,anggota', // Validasi peran
+    ]);
+
+    if ($validator->fails()) {
+        return redirect('register')
+            ->withErrors($validator)
+            ->withInput();
+    }
         $user = User::create([
             'email' => $request->email,
             'username' => $request->username,
