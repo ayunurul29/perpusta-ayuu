@@ -18,11 +18,10 @@
         @if(auth()->check() && auth()->user()->role == 'admin') 
             @include('includes._menu-admin') 
         @elseif(auth()->check() && auth()->user()->role == 'anggota') 
-            @include('includes._menu-anggota') 
+                 @include('includes._menu-anggota') 
         @endif 
+     
     </div> 
-    <div class="content"> 
-        @yield('content') <!-- Konten utama aplikasi --> 
-    </div>
+    
 
   </aside>

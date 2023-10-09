@@ -13,27 +13,31 @@
           </div>
 
           <div class="card-body">
-            <form action="{{ route('admin_update', $item->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('semua_update', $item->id) }}" method="POST" enctype="multipart/form-data">
               @csrf
                      <div class="form-group">
-                <label for="nama_admin">Nama Admin</label>
-                <input type="text" class="form-control" id="nama_admin" name="nama_admin" placeholder="Enter penerbit" value="{{ $item->nama_admin }}">
+                <label for="nama">Nama</label>
+                <input type="text" class="form-control" id="nama" name="nama" placeholder="Enter nama" value="{{ $item->nama }}">
               </div>
               
               <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Enter tahun terbit" value="{{ $item->username }}">
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" value="{{ $item->username }}">
               </div>
               <div class="form-group">
                 <label for="password">Password</label>
-                <input type="text" class="form-control" id="password" name="password" placeholder="Enter tahun terbit" value="{{ $item->password }}">
+                <input type="text" class="form-control" id="password" name="password" placeholder="Enter password" value="{{ $item->password }}">
+              </div>
+                <div class="form-group">
+                <label for="user_role">User Role</label>
+                <input type="text" class="form-control" id="user_role" name="user_role" placeholder="Enter user role" value="{{ $item->user_role }}">
               </div>
              
              
           <div class="card-footer">
             <button type="submit" class="btn btn-primary">Submit</button>
 
-            <a href="{{ route('admin_index') }}" class="btn btn-primary btn-flat">Kembali</a>
+            <a href="{{ route('semua_index') }}" class="btn btn-primary btn-flat">Kembali</a>
           </div>
           </form>
 

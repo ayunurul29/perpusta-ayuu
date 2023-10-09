@@ -29,6 +29,9 @@
             <a href="{{ url('excel') }}" class="btn btn-success btn-flat">
                 <i class="fa fa-file-excel"></i> Export Excel
             </a>
+            <a href="{{ url('anggota-pdf') }}" class="btn btn-danger btn-flat">
+                <i class="fa fa-file-pdf"></i> Export PDF
+            </a>
         </div>
         <div style="overflow: auto">
             <table class="table table-bordered table-condensed">
@@ -41,22 +44,20 @@
                 </tr>
                 @foreach ($anggota as $value)
                 <tr>
-                   <td>{{ $loop->iteration }}</td>
-                    <td>{{ $value->nama }}</td>
-                    <td>{{ $value->alamat }}</td>
-                    <td>{{ $value->email }}</td>
-                <td>
-                <form action="{{ route('anggota_destroy',$value->id) }}" method="POST">
-         
-                    <a class="btn btn-info" href="{{ route('anggota_show',$value->id) }}">Show</a>
+                    <td style="text-align:center;">{{ $loop->iteration }}</td>
+                    <td style="text-align:center;">{{ $value->nama }}</td>
+                    <td style="text-align:center;">{{ $value->alamat }}</td>
+                    <td style="text-align:center;">{{ $value->email }}</td>
+                    <td style="text-align:center">
+               
+                    <a class="btn btn-info" href="{{ route('anggota_show',$value->id) }}"><i class="fas fa-fw fa-eye"></i></a>
           
-                    <a class="btn btn-primary" href="{{ route('anggota_edit',$value->id) }}">Edit</a>
+                    <a class="btn btn-warning" href="{{ route('anggota_edit',$value->id) }}">  <i class="fas fa-fw fa-pencil"></i></a>
          
-                        @csrf
-                        @method('DELETE')
-            
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
+                    <form action="{{ route('anggota_destroy', $value->id) }}" method="post" class="d-inline">
+                                @csrf
+                    <button type="submit" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini?');" class="btn btn-danger" ><i class="fas fa-fw  fa-trash"></i></button>
+                    </form>
                 </td>
                 </tr>
                 @endforeach

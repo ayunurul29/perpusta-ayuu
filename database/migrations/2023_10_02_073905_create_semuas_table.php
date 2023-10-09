@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('semuas', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->string('password');
+            $table->string('username');
+            $table->string('user_role');
             $table->timestamps();
         });
     }

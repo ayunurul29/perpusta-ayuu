@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
-use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
 {
@@ -14,93 +14,109 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $admin =User::with('role');
+        $admin = Admin::All();
 
- return view('pages.admin.buku.index', [
-            'title' => 'Buku',
+ return view('pages.admin.admin.index', [
+            'admin' => $admin,
          
 
-        ]);    }
+        ]);   
+         }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-         return view('pages.admin.buku.index', [
-            'role' => Role::all(),
-    }
+         return view('pages.admin.admin.create', [
+            
+   
+        ]); 
+         }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+  
+      public function store(Request $request)
     {
-        $validateData =$request -> validate([
-            'username' => 'required'
-            'password' => "required|min:5|max:255"
-            //'nama_admin' => 'required'
-            // 'user_role' => 'required'
-            ]);
-        validateData['password']= Hash::make($validateData['password']);
+        $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+            'nama_admin' => 'required',
+          
+            
+        ]);
 
-        User::create($validateData);
+        Admin::create([
+          'username' =>  $request->username,
+            'password' => $request->password,
+            'nama_admin' => $request->nama_admin,
 
-        $input = $request->all();
+              ]);
 
-        User::create($input);
-        return redirect::route('admin_index')->with('toast_success','Data Berhasil Ditambahkan');
+        return Redirect::route('admin_index')->with('toast_success', 'Data Berhasil Ditambahkan!');
     }
+
+            
 
     /**
      * Display the specified resource.
      */
-    public function show(Admin $admin)
+      public function show($id)
     {
-        return view('pages.admin.show.index', [
-            'data' => 'data',
+        $data = Admin::findOrFail($id);
+
+        return view('pages.admin.admin.show', [
+            'data' => $data
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Admin $admin)
+   public function edit($id)
     {
-        $role = Role::all();
-        return view('pages.admin.edit.index', [
-            'role' => $role,
-        ]);
+        $item = Admin::findOrFail($id);
+      
 
+        return view('pages.admin.admin.edit', [
+            'item' => $item,
+               ]);
+            
     }
+
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Admin $admin)
+      public function update(Admin $admin, Request $request)
     {
-        $validateData =$request -> validate([
-            'username' => 'required'
-            'password' => "required|min:5|max:255"
-            //'nama_admin' => 'required'
-            // 'user_role' => 'required'
-            ]);
-        validateData['password']= Hash::make($validateData['password']);
+    $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+            'nama_admin' => 'required',
+          
+            
+        ]);
 
+        $admin->update([
+          'username' =>  $request->username,
+            'password' => $request->password,
+            'nama_admin' => $request->nama_admin,
 
-        $input = $request->all();
-
-        $admin->update($input);
-        return redirect::route('admin_index')->with('toast_success','Data Berhasil Dirubah');  
+              ]);
+          return redirect()->route('admin_index')->with('toast_success', 'Data berhasil di Rubah ');
     }
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Admin $admin)
-    {
-    Admin::destroy($admin->id);
-    return redirect::route('/admin')->with('toast_success','Data Berhasil Dihapus');  
+     {
+        Admin::destroy($admin->id);
+
+        return redirect('/admin')->with('toast_success', 'Data berhasil di Hapus  ');
 
     }
 }

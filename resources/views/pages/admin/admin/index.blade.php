@@ -29,36 +29,40 @@
             <a href="{{ url('excel') }}" class="btn btn-success btn-flat">
                 <i class="fa fa-file-excel"></i> Export Excel
             </a>
+            <a href="{{ url('admin-pdf') }}" class="btn btn-danger btn-flat">
+                <i class="fa fa-file-pdf"></i> Export PDF
+            </a>
         </div>
         <div style="overflow: auto">
             <table class="table table-bordered table-condensed">
                 <tr>
                     <th style="text-align:center;">No</th>
-                    <th style="text-align:center">User Role</th>
+                    <th style="text-align:center">Nama Admin</th>
                     <th style="text-align:center">Username</th>
                     <th style="text-align:center;">Password</th>
-                    <th style="text-align:center">Nama Admin</th>
                     <th width="250px" style="text-align: center;">Action</th>
                 </tr>
                 @foreach ($admin as $value)
                 <tr>
                     <td style="text-align:center;">{{ $loop->iteration }}</td>
-                    <td style="text-align:center;">{{ @$value->role->role}}</td>
+                    <td style="text-align:center;">{{ $value->nama_admin}}</td>
                     <td style="text-align:center;">{{ $value->username }}</td>
                     <td style="text-align:center;">{{ $value->password }}</td>
-                    <td style="text-align:center;">{{ @$value->role->role}}</td>
-                <td>
-                <form style="text-align:center;" action="{{ route('admin_destroy',$value->id) }}" method="POST">
-         
-                    <a class="btn btn-info" href="{{ route('admin_show',$value->id) }}">Show</a>
+                    <td style="text-align:center">
+               
+           
+                    <a class="btn btn-info" href="{{ route('admin_show',$value->id) }}">
+                    <i class="fas fa-fw fa-eye"></i>
+                    </a>
           
-                    <a class="btn btn-primary" href="{{ route('admin_edit',$value->id) }}">Edit</a>
+                    <a class="btn btn-warning" href="{{ route('admin_edit',$value->id) }}">
+                        <i class="fas fa-fw fa-pencil"></i>
+                    </a>
          
-                        @csrf
-                        @method('DELETE')
-            
-                        <button type="submit" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini?');" class="btn btn-danger">Delete</button>
-                </form>
+                      <form action="{{ route('admin_destroy', $value->id) }}" method="post" class="d-inline">
+                                @csrf
+                      <button type="submit" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini?');" class="btn btn-danger" ><i class="fas fa-fw  fa-trash"></i></button>
+                      </form>
                 </td>
                 </tr>
                 @endforeach

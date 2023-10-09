@@ -14,6 +14,8 @@ use App\Http\Controllers\PenerbitController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AnggotaController;
+use App\Http\Controllers\SemuaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -46,7 +48,6 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //template
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('kategori-grafik', [KategoriController::class, 'grafik'])->name('kategori-grafik');
 
 //BUKU
 Route::get('/buku', [BukuController::class, 'index'])->name('buku_index');
@@ -129,8 +130,6 @@ Route::get('/penerbit/show/{id}', [PenerbitController::class, 'show'])->name('pe
 Route::get('penerbit/search', [PenerbitController::class, 'search'])->name('penerbit_search');
  Route::get('penerbit-pdf', [PenerbitController::class, 'generatePDF'])->name('generate-pdf');
 Route::get('penerbit-excel', [PenerbitController::class, 'excel'])->name('penerbit-excel');
-//ADMIN
-Route::get('/admin', [AdminController::class, 'index'])->name('admin_index');
 
 //ROLE
 Route::get('/role', [RoleController::class, 'index'])->name('role_index');
@@ -149,7 +148,6 @@ Route::post('/anggota/destroy/{anggota}', [AnggotaController::class, 'destroy'])
 
 //SEMUA
 Route::get('/semua', [SemuaController::class, 'index'])->name('semua_index');
-Route::get('/semua_anggota', [SemuaController::class, 'index_anggota'])->name('semua_index_anggota');
 Route::get('/semua/create', [SemuaController::class, 'create'])->name('semua_create');
 Route::post('/semua/store', [SemuaController::class, 'store'])->name('semua_store');
 Route::get('/semua/show', [SemuaController::class, 'show'])->name('semua_show');
@@ -160,16 +158,47 @@ Route::post('/semua/update/{semua}', [SemuaController::class, 'update'])->name('
 Route::post('/semua/destroy/{semua}', [SemuaController::class, 'destroy'])->name('semua_destroy');
 
 // Grup admin
+Route::get('/admin', [AdminController::class, 'index'])->name('admin_index');
+Route::get('/admin/create', [AdminController::class, 'create'])->name('admin_create');
+Route::post('/admin/store', [AdminController::class, 'store'])->name('admin_store');
+Route::get('/admin/show', [AdminController::class, 'show'])->name('admin_show');
+
+Route::get('/admin/edit/{id}', [AdminController::class, 'edit'])->name('admin_edit');
+Route::get('/admin/show/{id}', [AdminController::class, 'show'])->name('admin_show');
+Route::post('/admin/update/{admin}', [AdminController::class, 'update'])->name('admin_update');
+Route::post('/admin/destroy/{admin}', [AdminController::class, 'destroy'])->name('admin_destroy');
+
 Route::middleware(['auth', 'role:admin'])->group(function () {
     // Rute-rute admin
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 });
     // ..
 
-// Grup anggota
-Route::middleware(['auth', 'role:anggota'])->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-});
+
+
+//ANGGOTA
+Route::get('/anggota', [AnggotaController::class, 'index'])->name('anggota_index');
+Route::get('/anggota_anggota', [AnggotaController::class, 'index_anggota'])->name('anggota_index_anggota');
+Route::get('/anggota/create', [AnggotaController::class, 'create'])->name('anggota_create');
+Route::post('/anggota/store', [AnggotaController::class, 'store'])->name('anggota_store');
+Route::get('/anggota/show', [AnggotaController::class, 'show'])->name('anggota_show');
+
+Route::get('/anggota/edit/{id}', [AnggotaController::class, 'edit'])->name('anggota_edit');
+Route::get('/anggota/show/{id}', [AnggotaController::class, 'show'])->name('anggota_show');
+Route::post('/anggota/update/{anggota}', [AnggotaController::class, 'update'])->name('anggota_update');
+Route::post('/anggota/destroy/{anggota}', [AnggotaController::class, 'destroy'])->name('anggota_destroy');
+
+// // Grup anggota
+// Route::get('/anggota', [AnggotaController::class, 'index'])->name('anggota_index');
+// Route::get('/anggota/create', [AnggotaController::class, 'create'])->name('anggota_create');
+// Route::post('/anggota/store', [AnggotaController::class, 'store'])->name('anggota_store');
+// Route::get('/anggota/show', [AnggotaController::class, 'show'])->name('anggota_show');
+
+// Route::get('/anggota/edit/{id}', [AnggotaController::class, 'edit'])->name('anggota_edit');
+// Route::get('/anggota/show/{id}', [AnggotaController::class, 'show'])->name('anggota_show');
+// Route::post('/anggota/update/{anggota}', [AnggotaController::class, 'update'])->name('anggota_update');
+// Route::post('/anggota/destroy/{anggota}', [AnggotaController::class, 'destroy'])->name('anggota_destroy');
+
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');

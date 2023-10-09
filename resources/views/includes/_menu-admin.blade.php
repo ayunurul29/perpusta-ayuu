@@ -90,32 +90,31 @@
             <i class="fa-solid fa-users"></i>
             <p>
                 User
-                <i class="fas fa-angle-left right"></i>
+              
             </p>
         </a>
-        <ul class="nav nav-treeview">
+
             <li class="nav-item">
-                <a href="{{ route('semua_index') }}" class="nav-link">
+                <a href="{{ url('/semua') }}" class="nav-link  {{ Request::is('semua') ? 'active':''}}">
                     <i class="fa-solid fa-list"></i>
                     <p>Semua</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('admin_index') }}" class="nav-link">
+                <a href="{{ url('/admin') }}" class="nav-link  {{ Request::is('admin') ? 'active':''}}">
                     <i class="fa-regular fa-keyboard"></i>
                     <p>Admin</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('anggota_index') }}" class="nav-link">
+                <a href="{{ url('/anggota') }}" class="nav-link  {{ Request::is('anggota') ? 'active':''}}">
                     <i class="fa-solid fa-user"></i>
                     <p>Anggota</p>
                 </a>
             </li>
-        </ul>
-    </li>
+       
         <li class="nav-item">
-            <a href="pages/kanban.html" class="nav-link">
+            <a href="pages/kanban.html" class="nav-link {{ Request::is('ganti Password') ? 'active':''}}">
               <i class="fa-solid fa-lock"></i>
               <p>
                 Ganti Password
@@ -131,7 +130,7 @@
             </a>
           </li>
           <li class="nav-item"> 
-        <a href="{{ url('/actionlogout') }}" class="nav-link"> 
+        <a href="{{ url('/actionlogout') }}" class="nav-link  {{ Request::is('logout') ? 'active':''}}"> 
           <i class="bi bi-box-arrow-in-left"></i> 
           <p>Logout</p> 
       </a> 

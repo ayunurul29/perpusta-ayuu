@@ -1,55 +1,53 @@
 @extends('layouts.admin')
 
 @section('content')
-
-<div class="card card-primary">
-    <div class="card-header">
-        <h2 class="card-title">Create Data Anggota</h2>
-    </div>
-
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <strong>Whoops!</strong> There were some problems with your input.<br><br>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-    
-    <div class="card-body">
-    <form action="{{ route('anggota_store') }}" method="post" enctype="multipart/form-data">
-        @csrf
-
-     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Nama:</strong>
-                <input type="text" name="nama" class="form-control" placeholder="" autofocus>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Alamat:</strong>
-                <input type="text" name="alamat" class="form-control" placeholder="">
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Email:</strong>
-                <input type="text" name="email" class="form-control" placeholder="">
-            </div>
-        </div>
-
-        </div>
-        
-        <div class="col-xs-12 col-sm-12 col-md-12">
-              <button type="submit" class="btn btn-primary">Simpan</button>
-              <a href="{{ route('anggota_index') }}" class="btn btn-warning">Kembali</a>
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Tambah Data</h3>
           </div>
-      </div>
 
-</form>
-</div>
+          <div class="card-body">
+            <form action="{{ route('anggota_store') }}" method="POST" enctype="multipart/form-data">
+              @csrf
+            <div class="form-group">
+                <label for="nama">Nama</label>
+                <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ old('nama') }}" placeholder="Enter nama" >
+                @error('nama')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+              </div>
+              <div class="form-group">
+                <label for="alamat">Alamat</label>
+                <input type="text" class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat" value="{{ old('alamat') }}" placeholder="Enter alamat" >
+                @error('alamat')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" placeholder="Enter email">
+                @error('email')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+              </div>
+             
+          <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+          </form>
+
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
+  </div>
+</section>
+
+
 @endsection

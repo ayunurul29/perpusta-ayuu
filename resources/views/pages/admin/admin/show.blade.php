@@ -8,22 +8,21 @@
     </div>
     <div class="card-body">
         <table class="table table-bordered">
-            <tr>
-                <th style="width: 180px">User Role</th>
-                <td>{{ @$semua->role->role }}</td>
+             <tr>
+                <th style="width: 180px">Nama Admin</th>
+                <td>{{ $data->nama_admin }}</td>
             </tr>
+            
             <tr>
                 <th style="width: 180px">Username</th>
-                <td>{{ @$semua->username }}</td>
+                <td>{{ $data->username }}</td>
             </tr>
+        
             <tr>
                 <th style="width: 180px">Password</th>
-                <td>{{ @$semua->password }}</td>
+                <td>{{ $data->password }}</td>
             </tr>
-            <tr>
-                <th style="width: 180px">Nama Admin</th>
-                <td>{{ @$semua->role->role }}</td>
-            </tr>
+           
         </table>
     </div>
 </div>

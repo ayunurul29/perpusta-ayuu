@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Semua;
+use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class SemuaController extends Controller
 {
@@ -12,104 +14,114 @@ class SemuaController extends Controller
      */
     public function index()
     {
-       return view('pages.admin.semua.index', [
-            'title' => 'Buku',
+        $semua = Semua::All();
 
-        ]);
-    } 
-    
-  public function index_anggota()
-    {
-       return view('pages.admin.semua.index_anggota', [
-            'title' => 'Buku',
-                'semuas' => Semua::all(),
+ return view('pages.admin.semua.index', [
+            'semua' => $semua,
+         
 
-        ]);
-    } 
+        ]);   
+         }
+
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('pages.admin.semua.create', [
-       
-            'buku' => Buku::all(),
-
-        ]);
-    } 
-    
+         return view('pages.admin.semua.create', [
+            
+   
+        ]); 
+         }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+  
+      public function store(Request $request)
     {
-          $validateData =$request -> validate([
-            'username' => 'required'
-            'password' => "required|min:5|max:255"
-            //'nama_admin' => 'required'
-            // 'user_role' => 'required'
-            ]);
-        validateData['password']= Hash::make($validateData['password']);
+        $request->validate([
+            'nama' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'user_role' => 'required',
+          
+            
+        ]);
 
-        User::create($validateData);
+        Semua::create([
+             'nama' => $request->nama,
+             'username' =>  $request->username,
+             'password' => $request->password,
+             'user_role' => $request->user_role,
+           
 
-        $input = $request->all();
+              ]);
 
-        User::create($input);
-        return redirect::route('semua_index')->with('toast_success','Data Berhasil Ditambahkan');
+        return Redirect::route('semua_index')->with('toast_success', 'Data Berhasil Ditambahkan!');
     }
+
+            
 
     /**
      * Display the specified resource.
      */
-    public function show(Semua $semua)
+      public function show($id)
     {
-         return view('pages.admin.semua.show', [
-       
-            'buku' => $data
+        $data = Semua::findOrFail($id);
 
+        return view('pages.admin.semua.show', [
+            'data' => $data
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Semua $semua)
+   public function edit($id)
     {
-         $role = Role::all();
+        $item = Semua::findOrFail($id);
+      
+
         return view('pages.admin.semua.edit', [
-            'role' => $role,
-           
+            'item' => $item,
+               ]);
+            
     }
+
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Semua $semua)
+      public function update(Semua $semua, Request $request)
     {
-         $validateData =$request -> validate([
-            'username' => 'required'
-            'password' => "required|min:5|max:255"
-            //'nama_admin' => 'required'
-            // 'user_role' => 'required'
-            ]);
-        validateData['password']= Hash::make($validateData['password']);
+    $request->validate([
+            'nama' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'user_role' => 'required',
+           
+            
+        ]);
 
-        User::create($validateData);
-
-        $input = $request->all();
-
-        User::create($input);
-        return redirect::route('semua_index')->with('toast_success','Data Berhasil Ditambahkan');
+        $semua->update([
+             'nama' => $request->nama,
+             'username' =>  $request->username,
+             'password' => $request->password,
+             'user_role' => $request->user_role,
+           
+              ]);
+          return redirect()->route('semua_index')->with('toast_success', 'Data berhasil di Rubah ');
     }
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Semua $semua)
-    {
-        Semua::destroy($semua->id);
+     {
+        Admin::destroy($semua->id);
 
-        return redirect('/semua')->with('toast_success','Data Berhasil Dihapus');
+        return redirect('/semua')->with('toast_success', 'Data berhasil di Hapus  ');
+
     }
-    }
+}

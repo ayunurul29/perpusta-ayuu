@@ -13,11 +13,11 @@
           </div>
 
           <div class="card-body">
-            <form action="{{ route('admin_store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('semua_store') }}" method="POST" enctype="multipart/form-data">
               @csrf
                 <div class="form-group">
-                <label for="nama_admin">Nama Admin</label>
-                <input type="text" class="form-control @error('nama_admin') is-invalid @enderror" id="nama_admin" name="nama_admin" value="{{ old('nama_admin') }}" placeholder="Enter nama_admin">
+                <label for="nama">Nama</label>
+                <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ old('nama') }}" placeholder="Enter nama_admin">
                 @error('nama_admin')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -31,13 +31,19 @@
                 @enderror
               </div>
               <div class="form-group">
-                <label for="password">password</label>
+                <label for="password">Password</label>
                 <input type="text" class="form-control @error('password') is-invalid @enderror" id="password" name="password" value="{{ old('password') }}" placeholder="Enter password" >
                 @error('password')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
               </div>
-            
+              <div class="form-group">
+                <label for="user_role">User Role</label>
+                <input type="text" class="form-control @error('user_role') is-invalid @enderror" id="user_role" name="user_role" value="{{ old('user_role') }}" placeholder="Enter user_role" >
+                @error('user_role')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+              </div>
              
           <div class="card-footer">
             <button type="submit" class="btn btn-primary">Submit</button>

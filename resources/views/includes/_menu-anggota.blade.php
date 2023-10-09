@@ -84,7 +84,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link  {{ Request::is('logout') ? 'active':''}}">
+            <a href="#" class="nav-link   {{ Request::is('gantipassword') ? 'active':''}}">
               <i class="fa-solid fa-lock"></i>
               <p>
                 Ganti Password
