@@ -1,6 +1,6 @@
 <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2021 <a href="https://github.com/ayunurul29">perpustakaan-ayuu</a>.</strong>
+            <strong>Copyright &copy; <?= date('Y'); ?>.<a href="https://github.com/ayunurul29">perpustakaan-ayuu</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 3.2.0

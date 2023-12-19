@@ -26,7 +26,7 @@
             <a href="{{ route('admin_create') }}" class="btn btn-primary btn-flat">
                 <i class="fa fa-plus-circle"></i> Tambah Data
             </a>
-            <a href="{{ url('excel') }}" class="btn btn-success btn-flat">
+            <a href="{{ url('admin-excel') }}" class="btn btn-success btn-flat">
                 <i class="fa fa-file-excel"></i> Export Excel
             </a>
             <a href="{{ url('admin-pdf') }}" class="btn btn-danger btn-flat">

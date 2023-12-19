@@ -168,4 +168,42 @@ if($request->has('search')){
     ]);
  
 }
-} 
+//excel 
+   public function excel()
+    {
+        // Buat objek Spreadsheet
+        $spreadsheet = new Spreadsheet();
+
+        // Buat sheet
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Isi data ke dalam sheet
+        $sheet->setCellValue('A1', 'No');
+        $sheet->setCellValue('B1', 'Nama Buku');
+        $sheet->setCellValue('C1', 'Anggota');
+        $sheet->setCellValue('D1', 'Tanggal Pinjam');
+        $sheet->setCellValue('E1', 'Tanggal Kembali');
+        $sheet->setCellValue('F1', 'Denda');
+        $sheet->setCellValue('G1', 'Status Peminjaman');
+
+        $peminjaman = Peminjaman::with('buku')->get();
+      
+        // Isi data pengguna ke dalam sheet
+        $row = 2;
+        foreach ($peminjaman as $pinjam) {
+            $sheet->setCellValue('A' . $row, $pinjam->buku->nama);
+            $sheet->setCellValue('B' . $row, $pinjam->id_anggota);
+            $sheet->setCellValue('D' . $row, $pinjam->tanggal_pinjam);
+            $sheet->setCellValue('C' . $row, $pinjam->tanggal_kembali);
+            $sheet->setCellValue('E' . $row, $pinjam->denda);
+            $sheet->setCellValue('F' . $row, $pinjam->id_status_peminjaman);
+        }
+
+$Writer = new Xlsx($spreadsheet);
+$filename = 'pinjam.xlsx';
+$Writer->save($filename);
+return response()->download($filename)->deleteFileAfterSend(true);
+    }
+
+}
+

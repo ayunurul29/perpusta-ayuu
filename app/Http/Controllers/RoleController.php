@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Role;
 use Illuminate\Http\Request;
 
@@ -12,13 +11,12 @@ class RoleController extends Controller
      */
     public function index()
     {
-         return view('pages.admin.role.index', [
+        return view('pages.admin.role.index', [
             'title' => 'Role',
             'role' => Role::all(),
 
         ]);
-    }
-
+    } 
     /**
      * Show the form for creating a new resource.
      */
@@ -32,15 +30,17 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    //
     }
+    
 
     /**
      * Display the specified resource.
      */
     public function show(Role $role)
-    {
-        //
+          {
+       
+      //
     }
 
     /**
@@ -48,22 +48,23 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+     //
     }
+    
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Role $role)
     {
-        //
+      //
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Role $role)
-    {
-        //
-    }
+     {
+      //
 }

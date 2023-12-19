@@ -47,14 +47,13 @@
                 @foreach ($semua as $value)
                 <tr>
                     <td style="text-align:center;">{{ $loop->iteration }}</td>
-                    <td style="text-align:center;">{{ $value->nama_admin}}</td>
+                    <td style="text-align:center;">{{ $value->nama}}</td>
                     <td style="text-align:center;">{{ $value->username }}</td>
                     <td style="text-align:center;">{{ $value->password }}</td>
-                    <td style="text-align:center;">{{ $value->user_role}}</td>
+                    <td style="text-align:center;">{{ @$value->role->role}}</td>
                     <td style="text-align:center">
                
-           
-                    <a class="btn btn-info" href="{{ route('semua_show',$value->id) }}">
+             <a class="btn btn-info" href="{{ route('semua_show',$value->id) }}">
                     <i class="fas fa-fw fa-eye"></i>
                     </a>
           
@@ -64,8 +63,11 @@
          
                       <form action="{{ route('semua_destroy', $value->id) }}" method="post" class="d-inline">
                                 @csrf
-                      <button type="submit" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini?');" class="btn btn-danger" ><i class="fas fa-fw  fa-trash"></i></button>
+                      <button type="submit" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini?');" class="btn btn-danger" >
+                        <i class="fas fa-fw  fa-trash"></i>
+                    </button>
                       </form>
+
                 
          
                     

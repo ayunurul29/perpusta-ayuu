@@ -12,7 +12,7 @@
         }
     </style>
     <center>
-        <h5>Laporan Penerbit PDF</h4>
+        <h5>Laporan Buku PDF</h4>
         <h6><a target="_blank" href="https://www.malasngoding.com/membuat-laporan-…n-dompdf-laravel/"></a></h5>
     </center>
  
@@ -20,23 +20,21 @@
         <thead>
         <tr>
             <th>No</th>
-            <th>Nama Penerbit</th>
-             <th>Alamat</th>
-              <th>Telepon</th>
-               <th>Email</th>
-                <th>Jumlah</th>
+            <th>Nama</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>User Role</th>
         </tr>
         </thead>
         <tbody>
             @php $i=1 @endphp
-            @foreach($penerbit as $value)
+            @foreach($semua as $value)
         <tr>
             <td>{{ $i++ }}</td>
             <td>{{ $value->nama }}</td>
-            <td>{{ $value->alamat }}</td>
-            <td>{{ $value->telepon  }}</td>
-            <td>{{ $value->email }}</td>
-            <td>{{ $value->getJumlahBuku () }}</td>
+            <td>{{ $value->username }}</td>
+            <td>{{ $value->password}}</td>
+            <td>{{ @$value->role->role }}</td>
         </tr>
             @endforeach
         </tbody>

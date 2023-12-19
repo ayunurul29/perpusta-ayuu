@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Anggota;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Illuminate\Support\Facades\Redirect;
-
+use PDF;
 class AnggotaController extends Controller
 {
     /**
@@ -119,4 +121,49 @@ class AnggotaController extends Controller
         return redirect('/anggota')->with('toast_success', 'Data berhasil di Hapus  ');
 
     }
+    public function generatePDF()
+    {
+        $anggota = anggota::get();
+  
+        $data = [
+            'anggota' => $anggota,
+        ]; 
+            
+        $pdf = PDF::loadView('pages.admin.anggota.myPDF', $data);
+     
+        return $pdf->stream();
+    } 
+    public function excel()
+    {
+        // Buat objek Spreadsheet
+        $spreadsheet = new Spreadsheet();
+
+        // Buat sheet
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Isi data ke dalam sheet
+        $sheet->setCellValue('A1', 'Nama');
+        $sheet->setCellValue('B1', 'Alamat');
+        $sheet->setCellValue('C1', 'Email');
+       
+        $anggota = Anggota::all();
+       
+        // Isi data pengguna ke dalam sheet
+        $row = 2;
+        foreach ($anggota as $value) {
+            $sheet->setCellValue('A' . $row, $value->nama);
+            $sheet->setCellValue('B' . $row, $value->alamat);
+            $sheet->setCellValue('C' . $row, $value->email);
+           
+      
+
+$Writer = new Xlsx($spreadsheet);
+$filename = 'anggota.xlsx';
+$Writer->save($filename);
+return response()->download($filename)->deleteFileAfterSend(true);
+    }
+
 }
+
+  }
+

@@ -37,14 +37,16 @@
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
               </div>
-              <div class="form-group">
+                 <div class="form-group">
+             <div class="form-group">
                 <label for="user_role">User Role</label>
-                <input type="text" class="form-control @error('user_role') is-invalid @enderror" id="user_role" name="user_role" value="{{ old('user_role') }}" placeholder="Enter user_role" >
-                @error('user_role')
-                <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-              </div>
-             
+                <select class="form-control" id="user_role" name="user_role" >
+            <option >User Role</option>
+                @foreach($role as $r)
+                <option value="{{ $r->id }}">{{ $r->role}}</option>
+                @endforeach
+            </select>
+          </div>
           <div class="card-footer">
             <button type="submit" class="btn btn-primary">Submit</button>
           </div>

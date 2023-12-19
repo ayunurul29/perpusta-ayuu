@@ -6,7 +6,7 @@
           <img src="{{asset('adminlte/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ auth()->user()->username }}</a>
+          <a href="#" class="d-block">{{ auth()->user()->name }}</a>
         </div>
       </div>
 
@@ -93,12 +93,13 @@
           </li>
           <li class="nav-item">
             <a href="{{url('/actionlogout')}}" class="nav-link  {{ Request::is('logout') ? 'active':''}}">
-              <i class="fa-solid fa-lock"></i>
+              <i class="fa-solid fa-left"></i>
               <p>
                 Logout
               </p>
             </a>
           </li>
+
       </nav>
     </div>
 <!-- /.sidebar-menu -->

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Role;
 
 class Semua extends Model
 {
@@ -11,14 +12,11 @@ class Semua extends Model
       use HasFactory;
     protected $guarded = [];
 
-    public function admin()
-    {
-        return $this->hasOne('admin::class');
-    }
 
-     public function semua()
+
+     public function role()
     {
-        return $this->hasOne('semua::class');
+        return $this->belongsTo(role::class, 'user_role');
     }
 }
 

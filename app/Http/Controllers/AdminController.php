@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Illuminate\Support\Facades\Redirect;
-
+use PDF;
 class AdminController extends Controller
 {
     /**
@@ -119,4 +121,50 @@ class AdminController extends Controller
         return redirect('/admin')->with('toast_success', 'Data berhasil di Hapus  ');
 
     }
+  public function generatePDF()
+    {
+        $admin = Admin::get();
+  
+        $data = [
+            'admin' => $admin,
+        ]; 
+            
+        $pdf = PDF::loadView('pages.admin.admin.myPDF', $data);
+     
+        return $pdf->stream();
+    } 
+    public function excel()
+    {
+        // Buat objek Spreadsheet
+        $spreadsheet = new Spreadsheet();
+
+        // Buat sheet
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Isi data ke dalam sheet
+        $sheet->setCellValue('A1', 'Nama Admin');
+        $sheet->setCellValue('B1', 'Password');
+        $sheet->setCellValue('C1', 'Username');
+       
+        $admin = Admin::all();
+       
+        // Isi data pengguna ke dalam sheet
+        $row = 2;
+        foreach ($admin as $value) {
+            $sheet->setCellValue('A' . $row, $value->nama_admin);
+            $sheet->setCellValue('B' . $row, $value->password);
+            $sheet->setCellValue('C' . $row, $value->username);
+           
+      
+
+$Writer = new Xlsx($spreadsheet);
+$filename = 'admin.xlsx';
+$Writer->save($filename);
+return response()->download($filename)->deleteFileAfterSend(true);
+    }
+
 }
+
+  }
+//excel 
+  

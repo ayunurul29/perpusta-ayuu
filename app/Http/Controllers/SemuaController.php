@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Semua;
 use App\Models\Role;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-
+use PDF;
 class SemuaController extends Controller
 {
     /**
@@ -15,6 +17,7 @@ class SemuaController extends Controller
     public function index()
     {
         $semua = Semua::All();
+
 
  return view('pages.admin.semua.index', [
             'semua' => $semua,
@@ -29,7 +32,8 @@ class SemuaController extends Controller
     public function create()
     {
          return view('pages.admin.semua.create', [
-            
+            'title' => 'Tambah role',
+                 'role' => Role::all(),
    
         ]); 
          }
@@ -81,10 +85,11 @@ class SemuaController extends Controller
    public function edit($id)
     {
         $item = Semua::findOrFail($id);
-      
+       $role = Role::All();
 
         return view('pages.admin.semua.edit', [
             'item' => $item,
+                 'role' => $role,
                ]);
             
     }
@@ -118,10 +123,55 @@ class SemuaController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Semua $semua)
-     {
-        Admin::destroy($semua->id);
+   {
+        semua::destroy($semua->id);
 
         return redirect('/semua')->with('toast_success', 'Data berhasil di Hapus  ');
 
     }
+    public function generatePDF()
+    {
+        $semua = Semua::get();
+  
+        $data = [
+            'semua' => $semua,
+        ]; 
+            
+        $pdf = PDF::loadView('pages.admin.semua.myPDF', $data);
+     
+        return $pdf->stream();
+    }
+    //excel 
+   public function excel()
+    {
+        // Buat objek Spreadsheet
+        $spreadsheet = new Spreadsheet();
+
+        // Buat sheet
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Isi data ke dalam sheet
+        $sheet->setCellValue('A1', 'Nama');
+        $sheet->setCellValue('C1', 'Username');
+        $sheet->setCellValue('B1', 'Password');
+        $sheet->setCellValue('D1', 'User Role');
+     
+        $semuas = Semua::with('role')->get();
+      
+        // Isi data pengguna ke dalam sheet
+        $row = 2;
+        foreach ($semuas as $value) {
+            $sheet->setCellValue('A' . $row, $value->nama);
+            $sheet->setCellValue('B' . $row, $value->username);
+            $sheet->setCellValue('D' . $row, $value->password);
+            $sheet->setCellValue('C' . $row, $value->role->role);
+      
+        }
+
+$Writer = new Xlsx($spreadsheet);
+$filename = 'semua.xlsx';
+$Writer->save($filename);
+return response()->download($filename)->deleteFileAfterSend(true);
+    }
+
 }

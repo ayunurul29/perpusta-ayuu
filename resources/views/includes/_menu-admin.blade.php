@@ -3,10 +3,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{asset('adminlte/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{asset('adminlte/dist/img/aku.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ auth()->user()->username }}</a>
+          <a href="#" class="d-block">{{ auth()->user()->name }}</a>
         </div>
       </div>
 
@@ -131,11 +131,14 @@
           </li>
           <li class="nav-item"> 
         <a href="{{ url('/actionlogout') }}" class="nav-link  {{ Request::is('logout') ? 'active':''}}"> 
-          <i class="bi bi-box-arrow-in-left"></i> 
+          <i class= "fa-solid fa-arrow-left-square-fill"></i> 
+
           <p>Logout</p> 
       </a> 
   </li>
+ 
 
           
       </nav>
+
     </div>

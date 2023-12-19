@@ -240,5 +240,28 @@ $filename = 'buku.xlsx';
 $Writer->save($filename);
 return response()->download($filename)->deleteFileAfterSend(true);
     }
+  public function detail()
+    {
+        return view('detail.lp', [
+            'title' => 'Buku',
+            'buku' => Buku::all(),
 
+        ]);
+    } 
+     public function detail1()
+    {
+        return view('detail.ssj', [
+            'title' => 'Buku',
+            'buku' => Buku::all(),
+
+        ]);
+    } 
+     public function detail2()
+    {
+        return view('detail.tmas', [
+            'title' => 'Buku',
+            'buku' => Buku::all(),
+
+        ]);
+    } 
 }
